@@ -9,14 +9,16 @@ import axios from 'axios'
 class EventCreate extends Component {
   constructor (props) {
     super(props)
+    console.log(props)
 
     this.state = {
-      events: {
+      event: {
         title: '',
         description: '',
         date: ''
       },
-      createdId: null
+      createdId: null,
+      user: props.user
     }
   }
 
@@ -24,8 +26,8 @@ class EventCreate extends Component {
     event.persist()
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
-      const editedEvents = Object.assign({}, prevState.events, updatedField)
-      return { events: editedEvents }
+      const editedEvents = Object.assign({}, prevState.event, updatedField)
+      return { event: editedEvents }
     })
   }
 
@@ -34,7 +36,10 @@ class EventCreate extends Component {
     axios({
       url: `${apiUrl}/events`,
       method: 'POST',
-      data: { event: this.state.event }
+      data: { event: this.state.event },
+      headers: {
+        'Authorization': `Token token=${this.state.user.token}`
+      }
     })
       .then(res => this.setState({ createdId: res.data.event._id }))
       .catch(console.error)
@@ -63,9 +68,8 @@ class EventCreate extends Component {
   // }
 
   render () {
-    const { events, createdId } = this.state
+    const { createdId } = this.state
     const { handleChange, handleSubmit } = this
-    console.log(events.title)
 
     if (createdId) {
       return <Redirect to={`/events/${createdId}`} />
@@ -73,7 +77,7 @@ class EventCreate extends Component {
 
     return (
       <EventForm
-        events={events}
+        event={event}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath='/'
