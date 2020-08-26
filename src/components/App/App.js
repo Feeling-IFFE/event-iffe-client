@@ -9,6 +9,7 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import CreateEvent from '../CreateEvent/CreateEvent'
+import EventEdit from '../EventEdit/EventEdit'
 
 class App extends Component {
   constructor () {
@@ -56,6 +57,7 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
+          <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
         </main>
       </Fragment>
     )
