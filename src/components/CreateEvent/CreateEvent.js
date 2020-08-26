@@ -47,9 +47,9 @@ class EventCreate extends Component {
 
   // onCreateEvent = event => {
   //   event.preventDefault()
-  //
+
   //   const { msgAlert, history, user } = this.props
-  //
+
   //   createEvent(this.state, user)
   //     .then(() => msgAlert({
   //       heading: 'Change Password Success',

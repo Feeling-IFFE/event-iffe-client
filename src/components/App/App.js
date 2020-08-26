@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
-
+import Events from '../Events'
+import Home from '../Home'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
@@ -43,6 +44,8 @@ class App extends Component {
           />
         ))}
         <main className="container">
+
+          <Route exact path='/' component={Home} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -55,7 +58,9 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+          <AuthenticatedRoute user={user} exact path='/events' component={Events} />
           <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
+          <AuthenticatedRoute user={user} exact path='/events/:id' component={Events} />
         </main>
       </Fragment>
     )
