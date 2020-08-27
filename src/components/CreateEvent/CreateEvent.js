@@ -11,12 +11,13 @@ class EventCreate extends Component {
     super(props)
     console.log(this.prop.user)
     this.state = {
-      events: {
+      event: {
         title: '',
         description: '',
         date: ''
       },
-      createdId: null
+      createdId: null,
+      user: props.user
     }
   }
 
@@ -24,8 +25,8 @@ class EventCreate extends Component {
     event.persist()
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
-      const editedEvents = Object.assign({}, prevState.events, updatedField)
-      return { events: editedEvents }
+      const editedEvents = Object.assign({}, prevState.event, updatedField)
+      return { event: editedEvents }
     })
   }
 
@@ -34,10 +35,11 @@ class EventCreate extends Component {
     axios({
       url: `${apiUrl}/events`,
       method: 'POST',
+
+      data: { event: this.state.event },
       headers: {
-        'Authorization':`Token token=${this.props.user.token}`
+        'Authorization': `Token token=${this.state.user.token}`
       }
-      data: { event: this.state.events }
     })
       .then(res => this.setState({ createdId: res.data.event._id }))
       .catch(console.error)
@@ -45,9 +47,9 @@ class EventCreate extends Component {
 
   // onCreateEvent = event => {
   //   event.preventDefault()
-  //
+
   //   const { msgAlert, history, user } = this.props
-  //
+
   //   createEvent(this.state, user)
   //     .then(() => msgAlert({
   //       heading: 'Change Password Success',
@@ -66,9 +68,8 @@ class EventCreate extends Component {
   // }
 
   render () {
-    const { events, createdId } = this.state
+    const { createdId } = this.state
     const { handleChange, handleSubmit } = this
-    console.log(events.title)
 
     if (createdId) {
       return <Redirect to={`/events/${createdId}`} />
@@ -76,7 +77,7 @@ class EventCreate extends Component {
 
     return (
       <EventForm
-        events={events}
+        event={event}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath='/'

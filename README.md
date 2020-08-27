@@ -36,5 +36,3 @@ The Feeling IFFI application is the perfect application to create events and eng
 ![Wireframe](https://i.imgur.com/erYHXMh.png)
 
 ## Future Updates
-
-For future updates the user will be able to write comments to other events, proving a better user experience. Another functionality that I would like to include in the future is a light and dark theme mode.
