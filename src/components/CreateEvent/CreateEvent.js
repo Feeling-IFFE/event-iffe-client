@@ -9,7 +9,7 @@ import axios from 'axios'
 class EventCreate extends Component {
   constructor (props) {
     super(props)
-
+    console.log(this.prop.user)
     this.state = {
       events: {
         title: '',
@@ -34,7 +34,10 @@ class EventCreate extends Component {
     axios({
       url: `${apiUrl}/events`,
       method: 'POST',
-      data: { event: this.state.event }
+      headers: {
+        'Authorization':`Token token=${this.props.user.token}`
+      }
+      data: { event: this.state.events }
     })
       .then(res => this.setState({ createdId: res.data.event._id }))
       .catch(console.error)
