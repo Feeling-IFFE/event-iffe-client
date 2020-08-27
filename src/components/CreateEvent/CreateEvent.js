@@ -32,7 +32,6 @@ class EventCreate extends Component {
   }
 
   handleSubmit = event => {
-    alert('Alert 1')
     event.preventDefault()
     axios({
       url: `${apiUrl}/events`,
@@ -43,7 +42,6 @@ class EventCreate extends Component {
       }
     })
       .then(res => this.setState({ createdId: res.data.event._id }))
-      .then(res => alert(res))
       .catch(console.error)
   }
 

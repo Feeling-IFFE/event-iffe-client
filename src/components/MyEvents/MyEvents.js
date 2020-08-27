@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import apiUrl from '../apiConfig'
+import apiUrl from '../../apiConfig'
 import moment from 'moment'
 // This will be our Events Index component (show all Events)
 class Events extends Component {
@@ -30,7 +30,7 @@ class Events extends Component {
 
   render () {
     const events = this.state.events.map(event => (
-      <div key={event._id} to={`/events/${event._id}`}>
+      <Link key={event._id} to={`/events/${event._id}`}>
         <div className="card mb-4 card-body">
           <div className="card-header mb-4" >
             {event.title}
@@ -39,10 +39,10 @@ class Events extends Component {
             {event.description}
           </div>
           <div className="mb-4">
-            Event Date: {moment(event.date).format('MMM Do YY')}
+            Event Date: {moment(event.date).format('LLLL')}
           </div>
         </div>
-      </div>
+      </Link>
     ))
     return (
       <div>

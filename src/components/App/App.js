@@ -11,6 +11,7 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import CreateEvent from '../CreateEvent/CreateEvent'
 import EventEdit from '../EventEdit/EventEdit'
+import MyEvents from '../MyEvents/MyEvents'
 
 class App extends Component {
   constructor () {
@@ -58,6 +59,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/my-events' render={() => (
+            <MyEvents user={user} />
           )} />
           <Route user={user} exact path='/events' component={Events} />
           <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
