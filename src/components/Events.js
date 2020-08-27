@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
+import moment from 'moment'
 // This will be our Events Index component (show all Events)
 class Events extends Component {
   constructor (props) {
@@ -38,7 +39,7 @@ class Events extends Component {
           </div>
           <div className="mb-4">
             Event Date:
-            {event.date}
+            {moment(event.date).format('MMM Do YY')}
           </div>
         </div>
       </Link>
