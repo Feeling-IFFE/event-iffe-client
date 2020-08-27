@@ -15,12 +15,13 @@ class Events extends Component {
     }
   }
   componentDidMount () {
-    // Make a rewuest for all of the Events
+    // Make a request for all of the Events
+    const token = this.state.user ? `Token token=${this.state.user.token}` : ''
     axios({
       url: `${apiUrl}/events`,
       method: 'GET',
       headers: {
-        'Authorization': `Token token=${this.state.user.token}`
+        'Authorization': token
       }
     })
       .then(res => this.setState({ events: res.data.events }))
@@ -38,8 +39,7 @@ class Events extends Component {
             {event.description}
           </div>
           <div className="mb-4">
-            Event Date:
-            {moment(event.date).format('MMM Do YY')}
+            Event Date: {moment(event.date).format('LLLL')}
           </div>
         </div>
       </Link>
