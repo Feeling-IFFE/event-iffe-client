@@ -1,41 +1,50 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const EventForm = ({ event, handleSubmit, handleChange }) => {
-  console.log(event)
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>Title</label>
-      <input
-        placeholder='Enter a title'
-        value={event.title}
-        name='title'
-        onChange={handleChange}
-      />
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
-      <label>Date</label>
-      <input
-        placeholder='Date'
-        value={event.date}
-        name='date'
-        type='date'
-        onChange={handleChange}
-      />
+const EventForm = ({ events, handleSubmit, handleChange, cancelPath }) => (
+  <div className="row2">
+    <div className="col-sm-10 col-md-8 mx-auto mt-5">
+      <h3>Create Event</h3>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            required
+            placeholder='Enter a title'
+            value={events.title}
+            name='title'
+            onChange={handleChange}
+          />
 
-      <label>Description</label>
-      <input
-        placeholder='Write a description...'
-        value={event.description}
-        name='description'
-        onChange={handleChange}
-      />
+          <Form.Label>Date</Form.Label>
+          <Form.Control
+            placeholder='Date'
+            value={events.date}
+            name='date'
+            onChange={handleChange}
+          />
 
-      <button type='submit'>Submit</button>
-      <Link to="/">
-        <button>Cancel</button>
-      </Link>
-    </form>
-  )
-}
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            placeholder='Write a description...'
+            value={events.description}
+            name='description'
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          type="submit"
+        >Submit</Button>
+        <Link to={cancelPath}>
+          <Button variant="secondary">Cancel</Button>
+        </Link>
+      </Form>
+    </div>
+  </div>
+)
 
 export default EventForm
