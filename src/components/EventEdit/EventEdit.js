@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import EventForm from '../EventForm/FormEvent'
+import EditForm from '../EditForm/EditForm'
 
 class EventEdit extends Component {
   constructor (props) {
@@ -49,15 +49,28 @@ class EventEdit extends Component {
       .then(() => this.setState({ updated: true }))
       .catch(console.error)
   }
+
+  handleDelete = () => {
+    axios({
+      url: `${apiUrl}/events/${this.props.match.params.id}`,
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token token=${this.state.user.token}`
+      }
+    })
+      .then(() => this.setState({ updated: true }))
+      .catch(console.error)
+  }
   render () {
     const { event, updated } = this.state
-    const { handleChange, handleSubmit } = this
+    const { handleChange, handleSubmit, handleDelete } = this
     if (updated) {
-      return <Redirect to='/events' />
+      return <Redirect to='/my-events' />
     }
     return (
-      <EventForm
+      <EditForm
         event={event}
+        handleDelete={handleDelete}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath={`/events/${this.props.match.params.id}`}
