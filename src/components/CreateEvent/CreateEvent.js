@@ -9,7 +9,6 @@ import axios from 'axios'
 class EventCreate extends Component {
   constructor (props) {
     super(props)
-    console.log(this.prop.user)
     this.state = {
       event: {
         title: '',

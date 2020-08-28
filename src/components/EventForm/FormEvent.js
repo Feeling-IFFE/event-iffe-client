@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const EventForm = ({ events, handleSubmit, handleChange, cancelPath }) => (
+const EventForm = ({ event, handleSubmit, handleChange, cancelPath }) => (
   <div className="row2">
     <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <h3>Create Event</h3>
@@ -14,7 +14,7 @@ const EventForm = ({ events, handleSubmit, handleChange, cancelPath }) => (
           <Form.Control
             required
             placeholder='Enter a title'
-            value={events.title}
+            value={event.title}
             name='title'
             onChange={handleChange}
           />
@@ -22,15 +22,16 @@ const EventForm = ({ events, handleSubmit, handleChange, cancelPath }) => (
           <Form.Label>Date</Form.Label>
           <Form.Control
             placeholder='Date'
-            value={events.date}
+            value={event.date}
             name='date'
+            type='date'
             onChange={handleChange}
           />
 
           <Form.Label>Description</Form.Label>
           <Form.Control
             placeholder='Write a description...'
-            value={events.description}
+            value={event.description}
             name='description'
             onChange={handleChange}
           />
