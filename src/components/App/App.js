@@ -63,10 +63,9 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/my-events' render={() => (
             <MyEvents user={user} />
           )} />
-          <Route user={user} path='/events' render={() => (
+          <Route user={user} exact path='/events' render={() => (
             <Events user={user} />
           )} />
-          <Route user={user} exact path='/events' component={Events} />
           <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
           <AuthenticatedRoute user={user} exact path='/events/:id' component={EventEdit} />
           <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
