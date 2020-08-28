@@ -38,12 +38,14 @@ class Events extends Component {
           <div className="card-text mb-4">
             {event.description}
           </div>
-          <div className="mb-4">
+          <form className="mb-4">
             Event Date: {moment(event.date).format('MMM Do YY')}
-          </div>
+          </form>
         </div>
       </div>
     ))
+
+    
     return (
       <div>
         <h4>Current Events</h4>

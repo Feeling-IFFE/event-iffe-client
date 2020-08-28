@@ -13,7 +13,7 @@ class EventEdit extends Component {
         description: '',
         date: ''
       },
-      updated: false,
+      updated: null,
       user: props.user
     }
   }
@@ -32,8 +32,8 @@ class EventEdit extends Component {
     event.persist()
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
-      const editedevents = Object.assign({}, prevState.event, updatedField)
-      return { event: editedevents }
+      const editedEvents = Object.assign({}, prevState.event, updatedField)
+      return { event: editedEvents }
     })
   }
   handleSubmit = event => {
