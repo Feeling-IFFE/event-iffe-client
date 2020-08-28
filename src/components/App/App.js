@@ -67,7 +67,7 @@ class App extends Component {
             <Events user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
-          <AuthenticatedRoute user={user} exact path='/events/:id' component={EventEdit} />
+          <AuthenticatedRoute user={user} path='/events/:id' component={EventEdit} />
           <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
         </main>
       </Fragment>
