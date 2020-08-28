@@ -1,62 +1,63 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-
 import apiUrl from '../../apiConfig'
 import EventForm from '../EventForm/FormEvent'
 
 class EventEdit extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
-      events: {
+      event: {
         title: '',
         description: '',
         date: ''
       },
-      updated: false
+      updated: null,
+      user: props.user
     }
   }
-
   componentDidMount () {
-    axios(`${apiUrl}/events/${this.props.match.params.id}`)
-      .then(res => this.setState({ events: res.data.events }))
+    axios({
+      url: `${apiUrl}/events/${this.props.match.params.id}`,
+      method: 'GET',
+      headers: {
+        'Authorization': `Token token=${this.state.user.token}`
+      }
+    })
+      .then(res => this.setState({ event: res.data.event }))
       .catch(console.error)
   }
-
   handleChange = event => {
     event.persist()
     this.setState(prevState => {
       const updatedField = { [event.target.name]: event.target.value }
-      const editedevents = Object.assign({}, prevState.events, updatedField)
-      return { events: editedevents }
+      const editedEvents = Object.assign({}, prevState.event, updatedField)
+      return { event: editedEvents }
     })
   }
-
   handleSubmit = event => {
     event.preventDefault()
-
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'PATCH',
-      data: { events: this.state.events }
+      data: { event: this.state.event },
+      headers: {
+        'Authorization': `Token token=${this.state.user.token}`
+      }
     })
       .then(() => this.setState({ updated: true }))
       .catch(console.error)
   }
-
   render () {
-    const { events, updated } = this.state
+    const { event, updated } = this.state
     const { handleChange, handleSubmit } = this
-
     if (updated) {
-      return <Redirect to={`/events/${this.props.match.params.id}`} />
+      return <Redirect to='/events' />
     }
-
     return (
       <EventForm
-        events={events}
+        event={event}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         cancelPath={`/events/${this.props.match.params.id}`}
@@ -64,5 +65,4 @@ class EventEdit extends Component {
     )
   }
 }
-
 export default EventEdit

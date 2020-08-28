@@ -72,7 +72,7 @@ class EventCreate extends Component {
     const { handleChange, handleSubmit } = this
 
     if (createdId) {
-      return <Redirect to={`/events/${createdId}`} />
+      return <Redirect to='/events' />
     }
 
     return (
