@@ -9,8 +9,6 @@ import axios from 'axios'
 class EventCreate extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
-
     this.state = {
       event: {
         title: '',
@@ -36,6 +34,7 @@ class EventCreate extends Component {
     axios({
       url: `${apiUrl}/events`,
       method: 'POST',
+
       data: { event: this.state.event },
       headers: {
         'Authorization': `Token token=${this.state.user.token}`
