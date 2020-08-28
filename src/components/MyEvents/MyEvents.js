@@ -31,7 +31,7 @@ class Events extends Component {
   render () {
     const events = this.state.events.map(event => (
       <Link key={event._id} to={`/events/${event._id}`}>
-        <div className="card mb-4 card-body">
+        <div className="card cardHover mb-4 card-body">
           <div className="card-header mb-4" >
             {event.title}
           </div>

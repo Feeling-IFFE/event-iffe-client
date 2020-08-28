@@ -30,7 +30,7 @@ class Events extends Component {
 
   render () {
     const events = this.state.events.map(event => (
-      <div key={event._id} to={`/events/${event._id}`}>
+      <div key={event._id}>
         <div className="card mb-4 card-body">
           <div className="card-header mb-4" >
             {event.title}
@@ -45,7 +45,6 @@ class Events extends Component {
       </div>
     ))
 
-    
     return (
       <div>
         <h4>Current Events</h4>

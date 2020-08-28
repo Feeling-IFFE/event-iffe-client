@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const EventForm = ({ event, handleSubmit, handleChange }) => {
-  console.log(event)
   return (
     <form onSubmit={handleSubmit}>
       <label>Title</label>
