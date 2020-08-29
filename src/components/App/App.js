@@ -13,6 +13,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import CreateEvent from '../CreateEvent/CreateEvent'
 import EventEdit from '../EventEdit/EventEdit'
 import MyEvents from '../MyEvents/MyEvents'
+import Footer from '../shared/Footer'
 
 class App extends Component {
   constructor () {
@@ -60,10 +61,10 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/my-events' render={() => (
-            <MyEvents user={user} />
+            <MyEvents user={user} msgAlert={this.msgAlert} />
           )} />
           <Route user={user} exact path='/events' render={() => (
-            <Events user={user} />
+            <Events user={user} msgAlert={this.msgAlert} />
           )} />
           <AuthenticatedRoute user={user} path='/create-event' render={() => (
             <CreateEvent msgAlert={this.msgAlert} user={user} />
