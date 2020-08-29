@@ -16,13 +16,15 @@ class Events extends Component {
   }
   componentDidMount () {
     // Make a request for all of the Events
-    const token = this.state.user ? `Token token=${this.state.user.token}` : ''
+    // const token = this.state.user ? `Token token=${this.state.user.token}` : ''
     axios({
-      url: `${apiUrl}/events`,
-      method: 'GET',
+      url: `${apiUrl}/userevents`,
+      method: 'POST',
       headers: {
-        'Authorization': token
-      }
+        'Authorization': `Token token=${this.state.user.token}`
+      },
+      // fix the pass of data
+      data: { ownerEvent: this.state.user._id }
     })
       .then(res => this.setState({ events: res.data.events }))
       .catch(console.log)
@@ -46,7 +48,7 @@ class Events extends Component {
     ))
     return (
       <div>
-        <h4>Current Events</h4>
+        <h4>My Current Events</h4>
         {events}
       </div>
     )

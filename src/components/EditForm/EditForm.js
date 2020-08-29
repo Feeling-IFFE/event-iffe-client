@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const EventForm = ({ event, handleSubmit, handleChange }) => {
+const EditForm = ({ event, handleSubmit, handleChange, handleDelete }) => {
   return (
     <div className="row2">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-        <h3>Create Event</h3>
+        <h3>Edit Events</h3>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
@@ -33,7 +33,9 @@ const EventForm = ({ event, handleSubmit, handleChange }) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Button varient="primary" type="submit">Submit</Button>
+          <Button varient="primary" type="submit">Submit
+          </Button>
+          <Button variant="warning" type="button" onClick={handleDelete}>Delete</Button>
           <Link to="/my-events">
             <Button variant="secondary">Cancel</Button>
           </Link>
@@ -42,4 +44,4 @@ const EventForm = ({ event, handleSubmit, handleChange }) => {
     </div>
   )
 }
-export default EventForm
+export default EditForm

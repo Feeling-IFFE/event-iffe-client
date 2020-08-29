@@ -41,6 +41,7 @@ class Events extends Component {
           <form className="mb-4">
             Event Date: {moment(event.date).format('MMM Do YY')}
           </form>
+          {this.props.user ? (<button type="button" className="btn btn-secondary">RSVP</button>) : ''}
         </div>
       </div>
     ))

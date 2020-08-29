@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 import Events from '../Events'
-import Home from '../Home'
+// import Home from '../Home'
+import Footer from '../shared/Footer'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
@@ -46,8 +47,6 @@ class App extends Component {
           />
         ))}
         <main className="container">
-
-          <Route exact path='/' component={Home} />
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
@@ -63,11 +62,17 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/my-events' render={() => (
             <MyEvents user={user} />
           )} />
-          <Route user={user} exact path='/events' component={Events} />
-          <AuthenticatedRoute user={user} path='/create-event' component={CreateEvent} />
-          <AuthenticatedRoute user={user} exact path='/events/:id' component={EventEdit} />
-          <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
+          <Route user={user} exact path='/events' render={() => (
+            <Events user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-event' render={() => (
+            <CreateEvent msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/events/:id' render={props => (
+            <EventEdit {...props} msgAlert={this.msgAlert} user={user} />
+          )} />
         </main>
+        <Footer />
       </Fragment>
     )
   }
