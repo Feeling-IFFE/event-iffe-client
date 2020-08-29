@@ -9,7 +9,7 @@ The Feeling IFFI application is the perfect application to create events and eng
 - [Deployed Feeling-IFFI  API](#)
 - [Deployed Client Feeling-IFFI Application](#)
 
-#### Technologies used for the Application
+#### Technologies used for the Application.
 
 - HTML
 - SCSS
