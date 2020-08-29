@@ -69,8 +69,7 @@ class Events extends Component {
       },
       data: {
         userID: this.props.user._id,
-        eventID: event._id,
-        clickData: Date().now()
+        eventID: event._id
       }
     })
       .then(res => {
