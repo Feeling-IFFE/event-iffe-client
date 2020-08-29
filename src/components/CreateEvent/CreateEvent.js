@@ -31,7 +31,6 @@ class EventCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-
     const { msgAlert } = this.props
 
     axios({

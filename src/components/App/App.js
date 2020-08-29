@@ -6,7 +6,6 @@ import Footer from '../shared/Footer'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
-// import SideNavPage from '../SideNav/SideNav'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
@@ -69,8 +68,9 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/create-event' render={() => (
             <CreateEvent msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/events/:id' component={EventEdit} />
-          <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
+          <AuthenticatedRoute user={user} path='/events/:id' render={props => (
+            <EventEdit {...props} msgAlert={this.msgAlert} user={user} />
+          )} />
         </main>
         <Footer />
       </Fragment>

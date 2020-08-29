@@ -38,9 +38,8 @@ class EventEdit extends Component {
     })
   }
   handleSubmit = event => {
-    const msgAlert = this.props
-
     event.preventDefault()
+    const { msgAlert } = this.props
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'PATCH',
@@ -49,17 +48,24 @@ class EventEdit extends Component {
         'Authorization': `Token token=${this.state.user.token}`
       }
     })
-      .then(() => this.setState({ updated: true }))
       .then(() => msgAlert({
-        heading: 'Event Edited!',
+        heading: 'Event edited!',
         message: messages.editEventSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .then(res => this.setState({ updated: true }))
+
+      .catch(() =>
+        msgAlert({
+          heading: 'Event failed!',
+          message: messages.editEventFailure,
+          variant: 'danger'
+        })
+      )
   }
 
   handleDelete = () => {
-    const { msgAlert } =
+    const { msgAlert } = this.props
 
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
@@ -88,7 +94,7 @@ class EventEdit extends Component {
         handleDelete={handleDelete}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        cancelPath={`/events/${this.props.match.params.id}`}
+        cancelPath='/events'
       />
     )
   }
