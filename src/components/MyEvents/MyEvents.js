@@ -48,7 +48,7 @@ class Events extends Component {
     ))
     return (
       <div>
-        <h4>Current Events</h4>
+        <h4>My Current Events</h4>
         {events}
       </div>
     )

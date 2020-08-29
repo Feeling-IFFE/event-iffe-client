@@ -7,7 +7,7 @@ const EditForm = ({ event, handleSubmit, handleChange, handleDelete }) => {
   return (
     <div className="row2">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-        <h3>Edit Events test</h3>
+        <h3>Edit Events</h3>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>

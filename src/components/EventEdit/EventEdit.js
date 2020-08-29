@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from '../AutoDismissAlert/messages'
 import EditForm from '../EditForm/EditForm'
 
 class EventEdit extends Component {
@@ -37,6 +38,8 @@ class EventEdit extends Component {
     })
   }
   handleSubmit = event => {
+    const msgAlert = this.props
+
     event.preventDefault()
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
@@ -47,10 +50,17 @@ class EventEdit extends Component {
       }
     })
       .then(() => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'Event Edited!',
+        message: messages.editEventSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
 
   handleDelete = () => {
+    const { msgAlert } =
+
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'DELETE',
@@ -59,6 +69,11 @@ class EventEdit extends Component {
       }
     })
       .then(() => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'Event Deleted!',
+        message: messages.deleteEventSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
   render () {
