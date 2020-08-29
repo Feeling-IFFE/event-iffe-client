@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from '../AutoDismissAlert/messages'
 
 class DeleteEvent extends Component {
   constructor (props) {
@@ -18,6 +19,9 @@ class DeleteEvent extends Component {
     .catch(console.error)
   }
   destroyEvent = () => {
+
+const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'DELETE',

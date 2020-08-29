@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 const EventForm = ({ event, handleSubmit, handleChange }) => {
-  console.log(event)
   return (
     <div className="row2">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">

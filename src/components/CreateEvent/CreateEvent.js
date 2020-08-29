@@ -4,7 +4,7 @@ import EventForm from '../EventForm/FormEvent'
 
 import apiUrl from '../../apiConfig'
 import axios from 'axios'
-// import messages from '../AutoDismissAlert/messages'
+import messages from '../AutoDismissAlert/messages'
 
 class EventCreate extends Component {
   constructor (props) {
@@ -31,6 +31,8 @@ class EventCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/events`,
       method: 'POST',
@@ -41,30 +43,19 @@ class EventCreate extends Component {
       }
     })
       .then(res => this.setState({ createdId: res.data.event._id }))
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Event created!',
+        message: messages.creatEventSuccess,
+        variant: 'success'
+      }))
+      .catch(() => {
+        msgAlert({
+          heading: 'Event failed!',
+          message: messages.creatEventFailure,
+          variant: 'danger'
+        })
+      })
   }
-
-  // onCreateEvent = event => {
-  //   event.preventDefault()
-
-  //   const { msgAlert, history, user } = this.props
-
-  //   createEvent(this.state, user)
-  //     .then(() => msgAlert({
-  //       heading: 'Change Password Success',
-  //       message: messages.createEventSuccess,
-  //       variant: 'success'
-  //     }))
-  //     .then(() => history.push('/'))
-  //     .catch(error => {
-  //       this.setState({ oldPassword: '', newPassword: '' })
-  //       msgAlert({
-  //         heading: 'Create event Failed with error: ' + error.message,
-  //         message: messages.createEventFailure,
-  //         variant: 'danger'
-  //       })
-  //     })
-  // }
 
   render () {
     const { createdId } = this.state

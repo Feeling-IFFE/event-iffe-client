@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from '../AutoDismissAlert/messages'
 import EditForm from '../EditForm/EditForm'
 
 class EventEdit extends Component {
@@ -38,6 +39,7 @@ class EventEdit extends Component {
   }
   handleSubmit = event => {
     event.preventDefault()
+    const { msgAlert } = this.props
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'PATCH',
@@ -46,11 +48,25 @@ class EventEdit extends Component {
         'Authorization': `Token token=${this.state.user.token}`
       }
     })
-      .then(() => this.setState({ updated: true }))
-      .catch(console.error)
+      .then(() => msgAlert({
+        heading: 'Event edited!',
+        message: messages.editEventSuccess,
+        variant: 'success'
+      }))
+      .then(res => this.setState({ updated: true }))
+
+      .catch(() =>
+        msgAlert({
+          heading: 'Event failed!',
+          message: messages.editEventFailure,
+          variant: 'danger'
+        })
+      )
   }
 
   handleDelete = () => {
+    const { msgAlert } = this.props
+
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
       method: 'DELETE',
@@ -59,6 +75,11 @@ class EventEdit extends Component {
       }
     })
       .then(() => this.setState({ updated: true }))
+      .then(() => msgAlert({
+        heading: 'Event Deleted!',
+        message: messages.deleteEventSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
   render () {
@@ -73,7 +94,7 @@ class EventEdit extends Component {
         handleDelete={handleDelete}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        cancelPath={`/events/${this.props.match.params.id}`}
+        cancelPath='/events'
       />
     )
   }
