@@ -57,7 +57,7 @@ class Events extends Component {
   }
 
   callRsVpFUnction = (event) => {
-    if (this.props.user && event.rsvps && event.rsvps.length > 0) {
+    if (this.props.user && this.checkEventRSVP(event.rsvps, event._id)) {
       return false
     }
     const token = this.state.user ? `Token token=${this.state.user.token}` : ''
@@ -66,9 +66,12 @@ class Events extends Component {
       method: 'POST',
       headers: {
         'Authorization': token
+      },
+      data: {
+        userID: this.props.user._id,
+        eventID: event._id,
+        clickData: Date().now()
       }
-    }, {
-      ownerID: 'hello'
     })
       .then(res => {
         this.fetchallEvents(true)
@@ -76,10 +79,27 @@ class Events extends Component {
       .catch(console.log)
   }
 
+  checkEventRSVP = (rsvp, id) => {
+    if (rsvp && Array.isArray(rsvp) && rsvp.length > 0) {
+      const tmpRSVPEventArr = rsvp.filter(x => x.userID === this.props.user._id && x.eventID === id)
+      if (tmpRSVPEventArr.length > 0) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+
   render () {
     console.log(this.state.events)
+    // const eventArray = []
+    // if (this.state.events && this.state.events.length > 0) {
+    //   this.state.events
+    // }
     const events = this.state.events.map(event => (
-      <div className={this.props.user && event.rsvps && event.rsvps.length > 0 ? 'green-btn' : ''} key={event._id}>
+      <div className={this.props.user && this.checkEventRSVP(event.rsvps, event._id) ? 'green-btn' : ''} key={event._id}>
         <div className="card mb-4 card-body">
           <div className="card-header mb-4" >
             {event.title}
@@ -90,7 +110,7 @@ class Events extends Component {
           <form className="mb-4">
             Event Date: {moment(event.date).format('MMM Do YY')}
           </form>
-          {this.props.user ? (<button onClick={(e) => this.callRsVpFUnction(event)} type="button" className={event.rsvps && event.rsvps.length < 1 ? 'btn btn-secondary' : 'green-btn'}> {event.rsvps && event.rsvps.length > 0 ? <span> You have subscribed to the event </span> : <span> RSVP </span>} </button>) : ''}
+          {this.props.user ? (<button onClick={(e) => this.callRsVpFUnction(event)} type="button" className={this.props.user && !this.checkEventRSVP(event.rsvps, event._id) ? 'btn btn-secondary' : 'green-btn'}> {this.props.user && this.checkEventRSVP(event.rsvps, event._id) ? <span> You have subscribed to the event </span> : <span> RSVP </span>} </button>) : ''}
         </div>
       </div>
     ))
