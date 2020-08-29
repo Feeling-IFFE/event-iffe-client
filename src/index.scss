@@ -18,3 +18,24 @@ a:hover, a:focus {
     border: 2px solid green !important;
     margin: 10px auto !important;
 }
+
+.main-footer {
+    display: flex;
+    padding-top: 3em;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    margin-bottom: 0px;
+    background-color: blue;
+    color: white;
+  }
+  .nav-hero {
+    background-color: blue;
+    color: white;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+  }

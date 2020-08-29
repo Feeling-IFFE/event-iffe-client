@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () => (
-  <p>Created by IFFE</p>
+  <div className="main-footer">Created by IFFE</div>
 )
 
 export default Footer

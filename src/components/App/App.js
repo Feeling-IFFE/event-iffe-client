@@ -12,6 +12,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import CreateEvent from '../CreateEvent/CreateEvent'
 import EventEdit from '../EventEdit/EventEdit'
 import MyEvents from '../MyEvents/MyEvents'
+import Footer from '../shared/Footer'
 
 class App extends Component {
   constructor () {
@@ -70,6 +71,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} exact path='/events/:id' component={EventEdit} />
           <AuthenticatedRoute user={user} path='/event-edit' component={EventEdit} />
         </main>
+        <Footer />
       </Fragment>
     )
   }
