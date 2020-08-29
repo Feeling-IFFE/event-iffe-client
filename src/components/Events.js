@@ -47,7 +47,7 @@ class Events extends Component {
       .then(res => this.setState({ events: res.data.events }, () => {
         if (showMessage) {
           context.props.msgAlert({
-            heading: 'You have successufully subscripbe to the event ',
+            heading: 'You have successfully subscribe to the event.',
             messagE: messages.signOutSuccess,
             variant: 'success'
           })
