@@ -3,6 +3,8 @@ import { } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../apiConfig'
 import moment from 'moment'
+import messages from './AutoDismissAlert/messages'
+
 // This will be our Events Index component (show all Events)
 class Events extends Component {
   constructor (props) {
@@ -15,7 +17,25 @@ class Events extends Component {
     }
   }
   componentDidMount () {
+    this.fetchallEvents(false)
+    // // Make a request for all of the Events
+    // const token = this.state.user ? `Token token=${this.state.user.token}` : ''
+    // axios({
+    //   url: `${apiUrl}/events`,
+    //   method: 'GET',
+    //   headers: {
+    //     'Authorization': token
+    //   }
+    // })
+    //   .then(res => this.setState({ events: res.data.events }))
+    //   .catch(console.log)
+  }
+
+  fetchallEvents = (showMessage) => {
     // Make a request for all of the Events
+    // const { msgAlert } = this.props
+    const context = this
+    console.log(context)
     const token = this.state.user ? `Token token=${this.state.user.token}` : ''
     axios({
       url: `${apiUrl}/events`,
@@ -24,13 +44,42 @@ class Events extends Component {
         'Authorization': token
       }
     })
-      .then(res => this.setState({ events: res.data.events }))
+      .then(res => this.setState({ events: res.data.events }, () => {
+        if (showMessage) {
+          context.props.msgAlert({
+            heading: 'You have successufully subscripbe to the event ',
+            messagE: messages.signOutSuccess,
+            variant: 'success'
+          })
+        }
+      }))
+      .catch(console.log)
+  }
+
+  callRsVpFUnction = (event) => {
+    if (this.props.user && event.rsvps && event.rsvps.length > 0) {
+      return false
+    }
+    const token = this.state.user ? `Token token=${this.state.user.token}` : ''
+    axios({
+      url: `${apiUrl}/events/${event._id}/rsvp`,
+      method: 'POST',
+      headers: {
+        'Authorization': token
+      }
+    }, {
+      ownerID: 'hello'
+    })
+      .then(res => {
+        this.fetchallEvents(true)
+      })
       .catch(console.log)
   }
 
   render () {
+    console.log(this.state.events)
     const events = this.state.events.map(event => (
-      <div key={event._id}>
+      <div className={this.props.user && event.rsvps && event.rsvps.length > 0 ? 'green-btn' : ''} key={event._id}>
         <div className="card mb-4 card-body">
           <div className="card-header mb-4" >
             {event.title}
@@ -41,7 +90,7 @@ class Events extends Component {
           <form className="mb-4">
             Event Date: {moment(event.date).format('MMM Do YY')}
           </form>
-          {this.props.user ? (<button type="button" className="btn btn-secondary">RSVP</button>) : ''}
+          {this.props.user ? (<button onClick={(e) => this.callRsVpFUnction(event)} type="button" className={event.rsvps && event.rsvps.length < 1 ? 'btn btn-secondary' : 'green-btn'}> {event.rsvps && event.rsvps.length > 0 ? <span> You have subscribed to the event </span> : <span> RSVP </span>} </button>) : ''}
         </div>
       </div>
     ))
