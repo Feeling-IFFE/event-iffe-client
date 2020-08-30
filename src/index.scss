@@ -1,1 +1,84 @@
 @import '~bootstrap/scss/bootstrap';
+
+a {
+    color: #5f5f5f;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #5f5f5f;
+    text-decoration: dashed;
+}
+
+.cardHover:hover{
+    box-shadow: 3px 3px 20px rgb(87, 105, 184);
+    transform: scale(1.03);
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+.green-btn{
+    border: 2px solid rgb(47, 47, 199) !important;
+    margin: 10px auto !important;
+}
+
+body {
+    margin-bottom: 50px;
+}
+
+.main-footer {
+    display: flex;
+    padding-top: 3em;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    background-color: rgb(47, 47, 199);
+    color: white;
+    text-align: center;
+  }
+  .nav-hero {
+    background-color: rgb(47, 47, 199);
+    color: white;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .homePage{
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      padding: 50px;
+      margin-top: 25vh;
+      background-color: rgb(47, 47, 199);
+      flex-direction: column;
+      align-content: center;
+
+    h1{
+        color: white;
+        font-size: 3rem;
+    }
+  }
+
+  .currentEventsTitle{
+    margin-top: 50px;
+    padding-bottom: 25px;
+    font-weight: bolder;
+  }
+
+  .currentMyEvent{
+    margin-top: 50px;
+    padding-bottom: 25px;
+    font-weight: bolder;
+  }
+
+  .current-Events{
+      margin-bottom: 150px;
+  }
+
+  .my-Events{
+    margin-bottom: 150px;
+  }
