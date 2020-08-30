@@ -21,7 +21,7 @@ const Footer = () => (
           <h5 className="title">{'Alyssa\'s gitHub'}</h5>
           <ul>
             <li className="list-unstyled">
-              <a href="#!">gitHub</a>
+              <a href="https://github.com/alyssaMoonStruck">gitHub</a>
             </li>
           </ul>
         </MDBCol>
