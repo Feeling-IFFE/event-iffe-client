@@ -3,7 +3,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from 'mdbreact'
 
 const Footer = () => (
   <MDBFooter className="main-footer font-small pt-4 mt-4">
-    <MDBContainer fluid className="text-center text-md-left">
+    <MDBContainer className="text-center text-md-left">
       <MDBRow>
         <MDBCol sm="4">
           <h5 className="title">Group gitHub repo</h5>

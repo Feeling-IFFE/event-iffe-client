@@ -35,7 +35,6 @@ class Events extends Component {
     // Make a request for all of the Events
     // const { msgAlert } = this.props
     const context = this
-    console.log(context)
     const token = this.state.user ? `Token token=${this.state.user.token}` : ''
     axios({
       url: `${apiUrl}/events`,
@@ -92,14 +91,14 @@ class Events extends Component {
   }
 
   render () {
-    console.log(this.state.events)
+    // console.log(this.state.events)
     // const eventArray = []
     // if (this.state.events && this.state.events.length > 0) {
     //   this.state.events
     // }
     const events = this.state.events.map(event => (
       <div className={this.props.user && this.checkEventRSVP(event.rsvps, event._id) ? 'green-btn' : ''} key={event._id}>
-        <div className="card mb-4 card-body">
+        <div className="card mb-4 card-body cardHover">
           <div className="card-header mb-4" >
             {event.title}
           </div>
@@ -115,8 +114,8 @@ class Events extends Component {
     ))
 
     return (
-      <div>
-        <h4>Current Events</h4>
+      <div className="current-Events">
+        <h4 className="currentEventsTitle">Current Events</h4>
         {events}
       </div>
     )
